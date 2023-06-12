@@ -101,6 +101,30 @@ public class Index {
                 }
                 menuitems();
             }
+           if(inputint == 1){
+               System.out.println("Lijst van Gebruikers:");
+               List<userObjClass> users = View();
+
+               for (userObjClass user : users) {
+                   System.out.println("ID."+user.id + "  Naam:" + user.user_name + ", Achternaam: " + user.user_lastname + ", DOB: " + user.DOB + ", Rol: " + user.Role + ", Status: " +  user.Status + "\n");
+               }
+               int id;
+               System.out.println("kies welke Gebruiker jij wilt updaten: " );
+               String input_id = userinput.nextLine();
+               int inputid_keuze = Integer.parseInt(input_keuze);
+               int UserId = inputid_keuze;
+               String newname = "";
+               String newlastname = "";
+               String newRole ="";
+               String newStatus = "";
+
+               newname = GetName(newname);
+               newlastname = GetLastname(newlastname);
+               newRole = GetRole(newRole);
+               newStatus = GetStatus(newStatus);
+
+
+            }
 
         }
     }
@@ -115,6 +139,11 @@ public class Index {
         System.out.println("Naam: ");
         name = getUserStringInput();
         return name;
+    }
+    private static String GetStatus(String Status){
+        System.out.println("Status(Actief/In-actief): ");
+        Status = getUserStringInput();
+        return Status;
     }
     private static String GetLastname(String achternaam){
         System.out.println("Achternaam: ");

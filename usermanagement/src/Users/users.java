@@ -44,5 +44,10 @@ public class users {
             return outcome;
         }
 
+        public static void UpdateUser(){
+            update_users u = new update_users();
+
+        }
+
 
 }
