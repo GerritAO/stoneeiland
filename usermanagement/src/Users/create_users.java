@@ -15,7 +15,7 @@ public class create_users extends users{
                 String password = "";
 
                 try(Connection conn = DriverManager.getConnection(url,username,password)){
-                    String query = "INSERT INTO st_users (user_name, user_password, user_lastname, DOB, role, status) VALUES (?, ?, ?,?,?,?)";
+                    String query = "INSERT INTO st_users (user_name, user_password, user_lastname, DOB, role, status) VALUES (?, ?, ?,? ,? ,?)";
 
                     PreparedStatement statement = conn.prepareStatement(query);
                     statement.setString(1, user_name);
