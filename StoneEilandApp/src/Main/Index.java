@@ -1,6 +1,7 @@
 package Main;
 
 import activiteiten.actObjeClass;
+import houses.housObjClass;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static activiteiten.activiteit_main.ViewAct;
+import static houses.house_main.ViewHuizen;
 
 public class Index {
 
@@ -21,7 +23,7 @@ public class Index {
     }
         private static void menuitems(){
             ArrayList menuitems = new ArrayList();
-            menuitems.add("0. Booking");
+            menuitems.add("0. Boeking");
             menuitems.add("1. Activiteiten");
             menuitems.add("2. Houses");
 
@@ -35,6 +37,10 @@ public class Index {
             String input = userinput.nextLine();
             int inputint = Integer.parseInt(input);
 
+            if(inputint == 0){
+
+            }
+
             if(inputint == 1){
                 List<actObjeClass> actvititeiten = ViewAct();
                 System.out.println("Een lijst van de Activiteiten " );
@@ -43,6 +49,14 @@ public class Index {
                 }
                 menuitems();
 
+            }
+            if(inputint == 2){
+                List<housObjClass> huizen = ViewHuizen();
+                System.out.println("Een lijst van Huizen " );
+                for (housObjClass huis : huizen) {
+                    System.out.println("ID."+ huis.id + "| Naam:" + huis.house_name+ "| Huis Price in $: " + huis.house_price+ "| Status:"+ huis.status+ "\n");
+                }
+                menuitems();
             }
         }
     }
