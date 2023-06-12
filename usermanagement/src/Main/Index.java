@@ -8,8 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-import static Users.users.Insert_user;
-import static Users.users.View;
+import static Users.users.*;
 
 public class Index {
     public static void main(String[] args) {
@@ -40,7 +39,7 @@ public class Index {
             List<userObjClass> users = View();
 
             for (userObjClass user : users) {
-                System.out.println(user.id + ":  Naam:" + user.user_name + ", Achternaam: " + user.user_lastname + ", DOB: " + user.DOB + ", Rol: " + user.Role + ", Status: " +  user.Status + "\n");
+                System.out.println("ID."+user.id + "  Naam:" + user.user_name + ", Achternaam: " + user.user_lastname + ", DOB: " + user.DOB + ", Rol: " + user.Role + ", Status: " +  user.Status + "\n");
             }
          menuitems();
 
@@ -72,10 +71,46 @@ public class Index {
         }
         if(inputint == 2){
 
-            System.out.println("nothing yet");
+            ArrayList sub_menuitems = new ArrayList();
+            sub_menuitems.add("0. Gebruikers Deleten");
+            sub_menuitems.add("1. Gebruikers updaten");
+
+            System.out.println("Kies(nummer) een optie");
+            for(int i = 0; i < sub_menuitems.size();i++){
+                System.out.println(sub_menuitems.get(i));
+            }
+            System.out.println("Vul je keuze in: " );
+            String input_keuze = userinput.nextLine();
+            int inputint_keuze = Integer.parseInt(input_keuze);
+            if(inputint_keuze == 0){
+
+                System.out.println("Lijst van Gebruikers:");
+                List<userObjClass> users = View();
+
+                for (userObjClass user : users) {
+                    System.out.println("ID."+user.id + "  Naam:" + user.user_name + ", Achternaam: " + user.user_lastname + ", DOB: " + user.DOB + ", Rol: " + user.Role + ", Status: " +  user.Status + "\n");
+                }
+                int id = 0 ;
+                id = GetId(id);
+                boolean result = Delete_user(id);
+                if(result== true){
+                    System.out.println("Gebruiker succesvol verwijderd\n");
+                }
+                if (result==false){
+                    System.out.println("fout opgetreden bij het verwijderen van een gebruiker\n");
+                }
+                menuitems();
+            }
+
         }
     }
 
+    private static int GetId(int ID){
+
+        System.out.println("Select welke ID/user jij wilt deleten: ");
+        ID = getUserIntInput();
+        return ID;
+    }
     private static String GetName(String name){
         System.out.println("Naam: ");
         name = getUserStringInput();

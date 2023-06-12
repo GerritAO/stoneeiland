@@ -32,5 +32,17 @@ public class users {
             return outcome;
         }
 
+        public static boolean Delete_user(int Id){
+            delete_users u = new delete_users();
+            boolean outcome = true;
+            if(u.Delete_user(Id)){
+
+            }else {
+                boolean outcome2 = false;
+                outcome = outcome2;
+            }
+            return outcome;
+        }
+
 
 }
