@@ -2,6 +2,7 @@ package Main;
 
 import activiteiten.actObjeClass;
 import houses.housObjClass;
+import Login.Login;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,6 +18,10 @@ public class Index {
 
         System.out.println("Welcome bij de Stone eiland APP\n ");
         System.out.println("Login om jouw adventure te beginnen\n");
+        Login usersLogin = new Login();
+    
+
+
         menuitems();
         System.out.println("\n");
 
