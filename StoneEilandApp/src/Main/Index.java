@@ -38,6 +38,7 @@ public class Index {
             menuitems.add("0. Boeking");
             menuitems.add("1. Activiteiten");
             menuitems.add("2. Houses");
+            menuitems.add("3. Logout");
 
             Scanner userinput = new Scanner(System.in);
 
@@ -69,6 +70,12 @@ public class Index {
                     System.out.println("ID."+ huis.id + "| Naam:" + huis.house_name+ "| Huis Price in $: " + huis.house_price+ "| Status:"+ huis.status+ "\n");
                 }
                 menuitems();
+            }
+            if(inputint == 3){
+                System.out.println("U bent succesvol uitgelogd\n");
+                System.out.println("Welcome bij de Stone eiland APP\n ");
+                System.out.println("Login om jouw adventure te beginnen\n");
+                LoginForm();
             }
         }
     }
