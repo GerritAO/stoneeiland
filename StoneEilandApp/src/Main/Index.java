@@ -1,6 +1,7 @@
 package Main;
 
 import activiteiten.actObjeClass;
+import com.mysql.cj.log.Log;
 import houses.housObjClass;
 import Login.Login;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static Login.Login.LoginForm;
 import static activiteiten.activiteit_main.ViewAct;
 import static houses.house_main.ViewHuizen;
 
@@ -18,12 +20,17 @@ public class Index {
 
         System.out.println("Welcome bij de Stone eiland APP\n ");
         System.out.println("Login om jouw adventure te beginnen\n");
-        Login usersLogin = new Login();
-    
-
-
-        menuitems();
+        boolean t = LoginForm();
+        if(t == true){
+            menuitems();
+        }
+        if(t == false){
+            System.out.println("Gebruiker heeft geen rechten of toegang tot het systeem, contact de beheerder");
+            LoginForm();
+        }
+        //menuitems();
         System.out.println("\n");
+
 
     }
         private static void menuitems(){

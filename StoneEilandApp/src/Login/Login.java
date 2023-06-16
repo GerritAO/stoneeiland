@@ -1,6 +1,5 @@
 package Login;
 
-import com.mysql.cj.log.Log;
 import users.userObjClass;
 
 import java.util.List;
@@ -8,9 +7,9 @@ import java.util.Scanner;
 
 import static users.users.View;
 
-public class Login {
+public class Login  {
 
-            public static void Login(){
+            public static Boolean LoginForm(){
                 List<userObjClass> users = View();
 
                 Scanner scanner = new Scanner(System.in);
@@ -21,6 +20,10 @@ public class Login {
                 System.out.println("Enter Password");
                 String inputPassw = scanner.nextLine();
 
+                checkCred t = new checkCred();
+                Boolean InlogCheck = t.UserCheck(inputUsername, inputPassw);
+
+               return InlogCheck;
 
 
 

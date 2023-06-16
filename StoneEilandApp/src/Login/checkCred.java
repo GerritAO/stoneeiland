@@ -16,9 +16,11 @@ public class checkCred {
 
                 if(user.user_name.equals(usernaam) && user.user_password.equals(passwoord)){
                     result = true;
+                    break;
                 }
                 else {
                     result = false;
+                    break;
                 }
 
             }
