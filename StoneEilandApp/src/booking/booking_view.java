@@ -20,9 +20,9 @@ public class booking_view extends booking_main{
                         result.getDate("klant_DOB"),
                         result.getString("gender"),
                         result.getString("huis_naam"),
+                        result.getDate("datum_reservering"),
                         result.getDate("datum_incheck"),
                         result.getDate("datum_uitcheck"),
-
                         result.getString("activiteit_naam"),
                         result.getString("reason"),
                         result.getString("overnight_Stay"),

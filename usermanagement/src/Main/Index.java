@@ -11,6 +11,8 @@ import java.util.Scanner;
 import static Users.users.*;
 
 public class Index {
+
+
     public static void main(String[] args) {
 
         System.out.println("Welcome bij de usermanagement Portal\n ");
