@@ -27,14 +27,14 @@ public class Index {
 
         System.out.println("Welcome bij de Stone eiland APP\n ");
         System.out.println("Login om jouw adventure te beginnen\n");
-//        boolean t = LoginForm();
-//        if(t == true){
-//            menuitems();
-//        }
-//        if(t == false){
-//            System.out.println("Gebruiker heeft geen rechten of toegang tot het systeem, contact de beheerder");
-//            LoginForm();
-//        }
+        boolean t = LoginForm();
+        if(t == true){
+            menuitems();
+        }
+        if(t == false){
+            System.out.println("Gebruiker heeft geen rechten of toegang tot het systeem, contact de beheerder");
+            LoginForm();
+        }
         menuitems();
         System.out.println("\n");
 
@@ -98,13 +98,14 @@ public class Index {
 
 
 
+
                 }
                 if(inputint_keuze == 1){
                     List<BookingObjClass> boekingen = ViewBoekingen();
                     System.out.println("Een lijst van Boekingen " );
                     for (BookingObjClass boekings : boekingen) {
                         System.out.println("ID."+ boekings.id
-                                + "| Naam:"+ boekings.klant_naam
+                                + "| Klant Naam:"+ boekings.klant_naam
                                 + "| Klant DOB:"+ boekings.klant_DOB
                                 + "| Gender:" + boekings.gender
                                 + "| Activiteit:" + boekings.activiteit_naam
