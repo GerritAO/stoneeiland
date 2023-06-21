@@ -1,6 +1,7 @@
 package Main;
 
 import activiteiten.actObjeClass;
+import booking.BookingObjClass;
 import com.mysql.cj.log.Log;
 import houses.housObjClass;
 import Login.Login;
@@ -12,6 +13,7 @@ import java.util.Scanner;
 
 import static Login.Login.LoginForm;
 import static activiteiten.activiteit_main.ViewAct;
+import static booking.booking_main.ViewBoekingen;
 import static houses.house_main.ViewHuizen;
 
 public class Index {
@@ -20,15 +22,15 @@ public class Index {
 
         System.out.println("Welcome bij de Stone eiland APP\n ");
         System.out.println("Login om jouw adventure te beginnen\n");
-        boolean t = LoginForm();
-        if(t == true){
-            menuitems();
-        }
-        if(t == false){
-            System.out.println("Gebruiker heeft geen rechten of toegang tot het systeem, contact de beheerder");
-            LoginForm();
-        }
-        //menuitems();
+//        boolean t = LoginForm();
+//        if(t == true){
+//            menuitems();
+//        }
+//        if(t == false){
+//            System.out.println("Gebruiker heeft geen rechten of toegang tot het systeem, contact de beheerder");
+//            LoginForm();
+//        }
+        menuitems();
         System.out.println("\n");
 
 
@@ -51,7 +53,12 @@ public class Index {
             int inputint = Integer.parseInt(input);
 
             if(inputint == 0){
-
+                List<BookingObjClass> boekingen = ViewBoekingen();
+                System.out.println("Een lijst van Boekingen " );
+                for (BookingObjClass boekings : boekingen) {
+                    System.out.println("ID."+ boekings.id + "| Naam:" + boekings.user + "| Huis Price in $: " + boekings.huis+ "| Status:"+ boekings.activiteiten+ "| Status:");
+                }
+                menuitems();
             }
 
             if(inputint == 1){
