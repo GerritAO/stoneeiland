@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 24, 2023 at 12:15 AM
+-- Generation Time: Jun 24, 2023 at 12:33 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -64,7 +64,15 @@ CREATE TABLE IF NOT EXISTS `st_boekingen` (
   KEY `user_id` (`user_id`),
   KEY `huis_id` (`huis_id`),
   KEY `activ_id` (`activ_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `st_boekingen`
+--
+
+INSERT INTO `st_boekingen` (`id`, `user_id`, `huis_id`, `activ_id`, `reason`, `overnight_stay`, `status`) VALUES
+(1, 2, 1, 7, 'Vakantie Vakantie', '2 overnachtingen', 'actief'),
+(2, 2, 4, 7, 'Ontspanning Ontspanning', '3 overnachtingen', 'actief');
 
 -- --------------------------------------------------------
 
