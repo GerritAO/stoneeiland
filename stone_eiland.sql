@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 24, 2023 at 12:15 AM
+-- Generation Time: Jun 24, 2023 at 12:39 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -77,6 +77,7 @@ CREATE TABLE IF NOT EXISTS `st_huizen` (
   `id` int NOT NULL AUTO_INCREMENT,
   `house_name` varchar(255) DEFAULT NULL,
   `house_price` decimal(10,0) DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
@@ -84,11 +85,11 @@ CREATE TABLE IF NOT EXISTS `st_huizen` (
 -- Dumping data for table `st_huizen`
 --
 
-INSERT INTO `st_huizen` (`id`, `house_name`, `house_price`) VALUES
-(1, 'AMS-huis', '50'),
-(2, 'KTI-huis', '70'),
-(3, 'JV-huis', '90'),
-(4, 'GS-huis', '110');
+INSERT INTO `st_huizen` (`id`, `house_name`, `house_price`, `status`) VALUES
+(1, 'AMS-huis', '50', 'Available'),
+(2, 'KTI-huis', '70', 'Available'),
+(3, 'JV-huis', '90', 'Available'),
+(4, 'GS-huis', '110', 'Available');
 
 -- --------------------------------------------------------
 
