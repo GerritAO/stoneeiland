@@ -15,6 +15,7 @@ import java.util.Scanner;
 
 import static Login.Login.LoginForm;
 import static activiteiten.activiteit_main.ViewAct;
+import static booking.booking_main.Insert_booking;
 import static booking.booking_main.ViewBoekingen;
 import static houses.house_main.ViewHuizen;
 
@@ -22,6 +23,8 @@ public class Index {
     protected String Username;
     protected String userRole;
     protected int userid;
+
+
 
     public static void main(String[] args) {
 
@@ -70,36 +73,37 @@ public class Index {
                 System.out.println("Vul je keuze in: " );
                 String input_keuze = userinput.nextLine();
                 int inputint_keuze = Integer.parseInt(input_keuze);
-                if(inputint_keuze == 0){
-                     String klant_naam=null;
-                    LocalDate klant_DoB=null;
-                     String gender=null;
-                     String activiteit=null;
-                     String huis=null;
-                    LocalDate Datumreservering=null;
-                    LocalDate Datumincheck=null;
-                    LocalDate Datumuitcheck=null;
-                     String reason=null;
-                     String overnight=null;
-                     String status=null;
-                    System.out.println("Welkom bij het scherm voor het invoeren van een Boeking\n");
-                    klant_naam = GetKlantnaam(klant_naam);
-                    klant_DoB = GetKlantDOB(klant_DoB);
-                    gender = GetGender(gender);
-                    activiteit = Getactiviteit(activiteit);
-                    huis=GetHuisnaam(huis);
-                    Datumreservering = GetRegistrationDate(Datumreservering);
-                    Datumincheck = Getincheck(Datumincheck);
-                    Datumuitcheck = Getuitcheck(Datumuitcheck);
-                    reason = Getreason(reason);
-                    overnight = Getovernight(overnight);
-                    status="pending";
+                        if(inputint_keuze == 0){
+                             String klant_naam=null;
+                            LocalDate klant_DoB=null;
+                             String gender=null;
+                             String activiteit=null;
+                             String huis=null;
+                            LocalDate Datumreservering=null;
+                            LocalDate Datumincheck=null;
+                            LocalDate Datumuitcheck=null;
+                             String reason=null;
+                             String overnight=null;
+                             String status=null;
+                            System.out.println("Welkom bij het scherm voor het invoeren van een Boeking\n");
+                            klant_naam = GetKlantnaam(klant_naam);
+                            klant_DoB = GetKlantDOB(klant_DoB);
+                            gender = GetGender(gender);
+                            activiteit = Getactiviteit(activiteit);
+                            huis=GetHuisnaam(huis);
+                            Datumreservering = GetRegistrationDate(Datumreservering);
+                            Datumincheck = Getincheck(Datumincheck);
+                            Datumuitcheck = Getuitcheck(Datumuitcheck);
+                            reason = Getreason(reason);
+                            overnight = Getovernight(overnight);
+                            status="pending";
+
+                            boolean result = Insert_booking(klant_naam,klant_DoB,gender,activiteit,huis,Datumreservering,
+                                    Datumincheck,Datumuitcheck,reason, overnight, status,gebruiker );
 
 
 
-
-
-                }
+                        }
                 if(inputint_keuze == 1){
                     List<BookingObjClass> boekingen = ViewBoekingen();
                     System.out.println("Een lijst van Boekingen " );
