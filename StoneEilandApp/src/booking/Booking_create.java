@@ -10,7 +10,7 @@ public class Booking_create  extends booking_main{
                                       String gender, String activiteit_naam ,
                                       String huis_naam,LocalDate datum_reservering,
                                       LocalDate datum_incheck, LocalDate datum_uitcheck,
-                                      String reason, String overnight_stay,
+                                      String reason, int overnight_stay,
                                       String status, String gebruiker) {
         String url = "jdbc:mysql://localhost:3306/stone_eiland";
         String username = "root";
@@ -29,11 +29,29 @@ public class Booking_create  extends booking_main{
             statement.setDate(7, Date.valueOf(datum_incheck));
             statement.setDate(8, Date.valueOf(datum_uitcheck));
             statement.setString(9, reason);
-            statement.setString(10, overnight_stay);
+            statement.setInt(10, overnight_stay);
             statement.setString(11, status);
             statement.setString(12, gebruiker);
 
             int rowAffected = statement.executeUpdate();
+            if(!activiteit_naam.equals(null)){
+                String sql = "UPDATE st_activiteiten SET Status = ? WHERE act_name LIKE ?";
+                PreparedStatement statementUpdate1 = conn.prepareStatement(sql);
+                status = "Un-Available";
+                statementUpdate1.setString(1,status);
+                statementUpdate1.setString(2,activiteit_naam);
+                int rowsAffected = statementUpdate1.executeUpdate();
+            }
+            if(!huis_naam.equals(null)){
+                String sql = "UPDATE st_huizen SET Status = ? WHERE house_name LIKE ?";
+                PreparedStatement statementUpdate2 = conn.prepareStatement(sql);
+                status = "Un-Available";
+                statementUpdate2.setString(1,status);
+                statementUpdate2.setString(2,huis_naam);
+                int rowsAffected = statementUpdate2.executeUpdate();
+
+            }
+
 
             if (rowAffected >= 1) {
                 return true;

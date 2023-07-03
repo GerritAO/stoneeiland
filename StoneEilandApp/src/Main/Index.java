@@ -20,9 +20,15 @@ import static booking.booking_main.ViewBoekingen;
 import static houses.house_main.ViewHuizen;
 
 public class Index {
-    protected String Username;
+    protected static String Username;
     protected String userRole;
     protected int userid;
+
+    protected static String role = "";
+
+
+
+
 
 
 
@@ -30,11 +36,17 @@ public class Index {
 
         System.out.println("Welcome bij de Stone eiland APP\n ");
         System.out.println("Login om jouw adventure te beginnen\n");
-        boolean t = LoginForm();
-        if(t == true){
+        String t = LoginForm();
+
+        String[] split = t.split(" ", 2);
+        role = split[0];
+        Username = split[1];
+
+        if(role.equals("Gebruiker")  | role.equals("Beheerder") ){
+
             menuitems();
         }
-        if(t == false){
+        if(!role.equals("Gebruiker")  | !role.equals("Beheerder")){
             System.out.println("Gebruiker heeft geen rechten of toegang tot het systeem, contact de beheerder");
             LoginForm();
         }
@@ -60,7 +72,7 @@ public class Index {
             String input = userinput.nextLine();
             int inputint = Integer.parseInt(input);
 
-            if(inputint == 0){
+            if(inputint == 0 ){
                 ArrayList submenubooking = new ArrayList();
                 submenubooking.add("0. Boeking toevoegen");
                 submenubooking.add("1. Boekingen bekijken");
@@ -70,10 +82,13 @@ public class Index {
                 for(int i = 0; i < submenubooking.size();i++){
                     System.out.println(submenubooking.get(i));
                 }
+
+
                 System.out.println("Vul je keuze in: " );
                 String input_keuze = userinput.nextLine();
                 int inputint_keuze = Integer.parseInt(input_keuze);
-                        if(inputint_keuze == 0){
+                        if(inputint_keuze == 0 && role.equals("Gebruiker") | role.equals("Beheerder")){
+
                              String klant_naam=null;
                             LocalDate klant_DoB=null;
                              String gender=null;
@@ -83,29 +98,40 @@ public class Index {
                             LocalDate Datumincheck=null;
                             LocalDate Datumuitcheck=null;
                              String reason=null;
-                             String overnight=null;
+                             int overnight = 0;
                              String status=null;
                             System.out.println("Welkom bij het scherm voor het invoeren van een Boeking\n");
                             klant_naam = GetKlantnaam(klant_naam);
                             klant_DoB = GetKlantDOB(klant_DoB);
                             gender = GetGender(gender);
-                            activiteit = Getactiviteit(activiteit);
-                            huis=GetHuisnaam(huis);
                             Datumreservering = GetRegistrationDate(Datumreservering);
                             Datumincheck = Getincheck(Datumincheck);
                             Datumuitcheck = Getuitcheck(Datumuitcheck);
                             reason = Getreason(reason);
                             overnight = Getovernight(overnight);
+                            huis=GetHuisnaam(huis);
+                            activiteit = Getactiviteit(activiteit);
                             status="pending";
+                            String gebruiker = Username;
 
                             boolean result = Insert_booking(klant_naam,klant_DoB,gender,activiteit,huis,Datumreservering,
                                     Datumincheck,Datumuitcheck,reason, overnight, status,gebruiker );
 
+                            if (result == true){
+                                System.out.println("Boeking succesvol ingevuld");
+                                menuitems();
+                            }
+                            else{
+                                System.out.println("Fout bij het invoeren");
+                                menuitems();
+                            }
 
 
                         }
-                if(inputint_keuze == 1){
-                    List<BookingObjClass> boekingen = ViewBoekingen();
+                if(inputint_keuze == 1 && role.equals("Gebruiker") | role.equals("Beheerder")){
+
+
+                    List<BookingObjClass> boekingen = ViewBoekingen(Username, role);
                     System.out.println("Een lijst van Boekingen " );
                     for (BookingObjClass boekings : boekingen) {
                         System.out.println("ID."+ boekings.id
@@ -124,8 +150,32 @@ public class Index {
                     }
                     menuitems();
                 }
-                if(inputint_keuze == 2){
+                if(inputint_keuze == 2 && role.equals("Gebruiker") && role.equals("Beheerder")){
 
+                    List<BookingObjClass> boekingen = ViewBoekingen(Username, role);
+                    System.out.println("Een lijst van Boekingen " );
+                    for (BookingObjClass boekings : boekingen) {
+                        System.out.println("ID."+ boekings.id
+                                + "| Klant Naam:"+ boekings.klant_naam
+                                + "| Klant DOB:"+ boekings.klant_DOB
+                                + "| Gender:" + boekings.gender
+                                + "| Activiteit:" + boekings.activiteit_naam
+                                + "| Huis : " + boekings.huis_naam
+                                + "| Datum reservering:" + boekings.datum_reservering
+                                + "| Datum incheck:" + boekings.datum_incheck
+                                + "| Datum uitcheck:" + boekings.datum_uitcheck
+                                + "| reason:" + boekings.reason
+                                + "| Overnight Stay:" + boekings.overnight_Stay
+                                + "| Gebruiker:" + boekings.gebruiker
+                                + "| Status:" + boekings.status);
+                    }
+                    System.out.println("Welke boekingen wil jij bewerken?");
+
+
+                }
+                else {
+                    System.out.println("Gebruiker " + Username  + " Heeft geen toegang");
+                    menuitems();
                 }
 
 
@@ -144,7 +194,7 @@ public class Index {
                 List<housObjClass> huizen = ViewHuizen();
                 System.out.println("Een lijst van Huizen " );
                 for (housObjClass huis : huizen) {
-                    System.out.println("ID."+ huis.id + "| Naam:" + huis.house_name+ "| Huis Price in $: " + huis.house_price+ "| Status:"+ huis.status+ "\n");
+                    System.out.println("ID."+ huis.id + "| Naam:" + huis.house_name+ "| Huis Price in $: " + huis.house_price+ "| Status:"+ huis.Status+ "\n");
                 }
                 menuitems();
             }
@@ -193,7 +243,7 @@ public class Index {
         List<housObjClass> huizen = ViewHuizen();
         System.out.println("Een lijst van Huizen available " );
         for (housObjClass huis : huizen) {
-            System.out.println("ID."+ huis.id + "| Naam:" + huis.house_name+ "| Huis Price in $: " + huis.house_price+ "| Status:"+ huis.status+ "\n");
+            System.out.println("ID."+ huis.id + "| Naam:" + huis.house_name+ "| Huis Price in $: " + huis.house_price+ "| Status:"+ huis.Status+ "\n");
         }
         System.out.println("Huis: ");
         Huis = getUserStringInput();
@@ -221,9 +271,9 @@ public class Index {
         return reason;
     }
 
-    private static String Getovernight(String overnightstay){
+    private static int Getovernight(int  overnightstay){
         System.out.println("Overnight(yes/No): ");
-        overnightstay = getUserStringInput();
+        overnightstay = getUserIntInput();
         return overnightstay;
     }
     private static String GetStatus(String Status){

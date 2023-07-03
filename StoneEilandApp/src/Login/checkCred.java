@@ -8,24 +8,23 @@ import static users.users.View;
 
 public class checkCred {
     private List<userObjClass> users;
-    public boolean UserCheck(String usernaam, String passwoord){
+    public String UserCheck(String usernaam, String passwoord){
 
             users = View();
-            Boolean result = false;
+            String result = "";
             for(userObjClass user: users){
 
                 if(user.user_name.equals(usernaam) && user.user_password.equals(passwoord)){
-                    result = true;
+                    result = user.Role +" "+ user.user_name;
                     break;
                 }
                 else {
-                    result = false;
+                    result = "Gebruiker heeft geen rechten of bestaat niet";
                     break;
                 }
 
             }
-            return result;
 
-
+        return result;
     }
 }

@@ -9,7 +9,7 @@ import static users.users.View;
 
 public class Login  {
 
-            public static Boolean LoginForm(){
+            public static String LoginForm(){
                 List<userObjClass> users = View();
 
                 Scanner scanner = new Scanner(System.in);
@@ -21,7 +21,7 @@ public class Login  {
                 String inputPassw = scanner.nextLine();
 
                 checkCred t = new checkCred();
-                Boolean InlogCheck = t.UserCheck(inputUsername, inputPassw);
+                String InlogCheck = t.UserCheck(inputUsername, inputPassw);
 
                return InlogCheck;
 
