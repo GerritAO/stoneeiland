@@ -8,6 +8,7 @@ import Login.Login;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,8 +23,9 @@ public class Index {
     protected static String Username;
     protected String userRole;
     protected int userid;
-
+    protected  static String dob_user;
     protected static String role = "";
+    protected static int days;
 
 
 
@@ -37,9 +39,13 @@ public class Index {
         System.out.println("Login om jouw adventure te beginnen\n");
         String t = LoginForm();
 
-        String[] split = t.split(" ", 2);
+        String[] split = t.split(" ", 3);
         role = split[0];
         Username = split[1];
+        dob_user = split[2];
+        LocalDate Date = LocalDate.now();
+        Long DayDiff = ChronoUnit.YEARS.between( LocalDate.parse(dob_user), Date);
+        days = Math.toIntExact(DayDiff);
 
         if(role.equals("Gebruiker")  | role.equals("Beheerder") ){
 
@@ -86,19 +92,20 @@ public class Index {
                 System.out.println("Vul je keuze in: " );
                 String input_keuze = userinput.nextLine();
                 int inputint_keuze = Integer.parseInt(input_keuze);
-                        if(inputint_keuze == 0 && role.equals("Gebruiker") | role.equals("Beheerder")){
+                    if(days >= 19){
+                        if(inputint_keuze == 0 && role.equals("Gebruiker") | role.equals("Beheerder" ) ){
 
-                             String klant_naam=null;
+                            String klant_naam=null;
                             LocalDate klant_DoB=null;
-                             String gender=null;
-                             String activiteit=null;
-                             String huis=null;
+                            String gender=null;
+                            String activiteit=null;
+                            String huis=null;
                             LocalDate Datumreservering=null;
                             LocalDate Datumincheck=null;
                             LocalDate Datumuitcheck=null;
-                             String reason=null;
-                             int overnight = 0;
-                             String status=null;
+                            String reason=null;
+                            int overnight = 0;
+                            String status=null;
                             System.out.println("Welkom bij het scherm voor het invoeren van een Boeking\n");
                             klant_naam = GetKlantnaam(klant_naam);
                             klant_DoB = GetKlantDOB(klant_DoB);
@@ -126,6 +133,12 @@ public class Index {
                             }
 
 
+                        }
+                    }
+
+                        else {
+                            System.out.println("Gebruiker is " + days +" en is te jong om een boeking te doen");
+                            menuitems();
                         }
                 if(inputint_keuze == 1 && role.equals("Gebruiker") | role.equals("Beheerder")){
 
@@ -264,6 +277,9 @@ public class Index {
                 System.out.println("U bent succesvol uitgelogd\n");
                 System.out.println("Welcome bij de Stone eiland APP\n ");
                 System.out.println("Login om jouw adventure te beginnen\n");
+                 Username=null;
+                 dob_user=null;
+                 role = null;
                 LoginForm();
             }
         }

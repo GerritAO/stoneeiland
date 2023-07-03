@@ -15,7 +15,7 @@ public class checkCred {
             for(userObjClass user: users){
 
                 if(user.user_name.equals(usernaam) && user.user_password.equals(passwoord)){
-                    result = user.Role +" "+ user.user_name;
+                    result = user.Role +" "+ user.user_name + " " + user.DOB.toString();
                     break;
                 }
                 else {
