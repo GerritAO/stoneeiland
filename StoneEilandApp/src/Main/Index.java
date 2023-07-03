@@ -15,8 +15,7 @@ import java.util.Scanner;
 
 import static Login.Login.LoginForm;
 import static activiteiten.activiteit_main.ViewAct;
-import static booking.booking_main.Insert_booking;
-import static booking.booking_main.ViewBoekingen;
+import static booking.booking_main.*;
 import static houses.house_main.ViewHuizen;
 
 public class Index {
@@ -144,33 +143,96 @@ public class Index {
                                 + "| Datum incheck:" + boekings.datum_incheck
                                 + "| Datum uitcheck:" + boekings.datum_uitcheck
                                 + "| reason:" + boekings.reason
-                                + "| Overnight Stay:" + boekings.overnight_Stay
+                                + "| Overnight Stay:" + boekings.overnight_Stay + "dag(en)"
                                 + "| Gebruiker:" + boekings.gebruiker
                                 + "| Status:" + boekings.status);
                     }
                     menuitems();
                 }
-                if(inputint_keuze == 2 && role.equals("Gebruiker") && role.equals("Beheerder")){
+                if(inputint_keuze == 2 && role.equals("Gebruiker") | role.equals("Beheerder")){
 
-                    List<BookingObjClass> boekingen = ViewBoekingen(Username, role);
-                    System.out.println("Een lijst van Boekingen " );
-                    for (BookingObjClass boekings : boekingen) {
-                        System.out.println("ID."+ boekings.id
-                                + "| Klant Naam:"+ boekings.klant_naam
-                                + "| Klant DOB:"+ boekings.klant_DOB
-                                + "| Gender:" + boekings.gender
-                                + "| Activiteit:" + boekings.activiteit_naam
-                                + "| Huis : " + boekings.huis_naam
-                                + "| Datum reservering:" + boekings.datum_reservering
-                                + "| Datum incheck:" + boekings.datum_incheck
-                                + "| Datum uitcheck:" + boekings.datum_uitcheck
-                                + "| reason:" + boekings.reason
-                                + "| Overnight Stay:" + boekings.overnight_Stay
-                                + "| Gebruiker:" + boekings.gebruiker
-                                + "| Status:" + boekings.status);
+                    ArrayList submenubooking1 = new ArrayList();
+                    submenubooking1.add("0. Boeking Annuleren");
+                    submenubooking1.add("1. Boekingen Bevestigen");
+
+                    System.out.println("Kies(nummer) een optie");
+                    for(int i = 0; i < submenubooking1.size();i++){
+                        System.out.println(submenubooking1.get(i));
                     }
-                    System.out.println("Welke boekingen wil jij bewerken?");
 
+
+                    System.out.println("Vul je keuze in: " );
+                    String in_bewerken= userinput.nextLine();
+                    int input_bewerken = Integer.parseInt(in_bewerken);
+                    if(input_bewerken == 0 && role.equals("Gebruiker") | role.equals("Beheerder") ){
+                        List<BookingObjClass> boekingen = ViewBoekingen(Username, role);
+                        System.out.println("Een lijst van Boekingen " );
+                        for (BookingObjClass boekings : boekingen) {
+                            System.out.println("ID."+ boekings.id
+                                    + "| Klant Naam:"+ boekings.klant_naam
+                                    + "| Klant DOB:"+ boekings.klant_DOB
+                                    + "| Gender:" + boekings.gender
+                                    + "| Activiteit:" + boekings.activiteit_naam
+                                    + "| Huis : " + boekings.huis_naam
+                                    + "| Datum reservering:" + boekings.datum_reservering
+                                    + "| Datum incheck:" + boekings.datum_incheck
+                                    + "| Datum uitcheck:" + boekings.datum_uitcheck
+                                    + "| reason:" + boekings.reason
+                                    + "| Overnight Stay:" + boekings.overnight_Stay + "dag(en)"
+                                    + "| Gebruiker:" + boekings.gebruiker
+                                    + "| Status:" + boekings.status);
+                        }
+                        System.out.println("Welke boekingen wil jij bewerken?\n");
+                        int Id_booking = 0;
+                        String reasoning = null;
+                        Id_booking =GetId(Id_booking);
+                        reasoning = UpdateReason(reasoning);
+
+                        boolean result = Update_Reason(Id_booking, reasoning);
+
+                        if (result == true){
+                            System.out.println("Boeking succesvol upgedate en geannuleerd");
+                            menuitems();
+                        }
+                        else{
+                            System.out.println("Fout bij het updaten en annuleren");
+                            menuitems();
+                        }
+
+                    }
+                    if(input_bewerken == 1 && !role.equals("Gebruiker") | role.equals("Beheerder")){
+                        List<BookingObjClass> boekingen = ViewBoekingen(Username, role);
+                        System.out.println("Een lijst van Boekingen " );
+                        for (BookingObjClass boekings : boekingen) {
+                            System.out.println("ID."+ boekings.id
+                                    + "| Klant Naam:"+ boekings.klant_naam
+                                    + "| Klant DOB:"+ boekings.klant_DOB
+                                    + "| Gender:" + boekings.gender
+                                    + "| Activiteit:" + boekings.activiteit_naam
+                                    + "| Huis : " + boekings.huis_naam
+                                    + "| Datum reservering:" + boekings.datum_reservering
+                                    + "| Datum incheck:" + boekings.datum_incheck
+                                    + "| Datum uitcheck:" + boekings.datum_uitcheck
+                                    + "| reason:" + boekings.reason
+                                    + "| Overnight Stay:" + boekings.overnight_Stay + "dag(en)"
+                                    + "| Gebruiker:" + boekings.gebruiker
+                                    + "| Status:" + boekings.status);
+                        }
+                        System.out.println("Welke boekingen wil jij bevestigen?\n");
+                        int Id_booking = 0;
+                        Id_booking =GetId(Id_booking);
+                        boolean result = Update_Status(Id_booking);
+
+                        if (result == true){
+                            System.out.println("Boeking succesvol upgedate en bevestigd");
+                            menuitems();
+                        }
+                        else{
+                            System.out.println("Fout bij het updaten en annuleren");
+                            menuitems();
+                        }
+
+                    }
 
                 }
                 else {
@@ -209,10 +271,11 @@ public class Index {
 
     private static int GetId(int ID){
 
-        System.out.println("Select welke ID/user jij wilt deleten: ");
+        System.out.println("Select welke ID van boeking dat u wilt bewerken: ");
         ID = getUserIntInput();
         return ID;
     }
+
     private static String GetKlantnaam(String klant){
         System.out.println("Klantnaam: ");
         klant = getUserStringInput();
@@ -276,10 +339,10 @@ public class Index {
         overnightstay = getUserIntInput();
         return overnightstay;
     }
-    private static String GetStatus(String Status){
-        System.out.println("Status(Actief/In-actief): ");
-        Status = getUserStringInput();
-        return Status;
+    private static String UpdateReason(String Reason){
+        System.out.println("Geef een reden aan waarom deze boeking word geannuleerd: ");
+        Reason = getUserStringInput();
+        return Reason;
     }
 
 

@@ -45,4 +45,34 @@ public class booking_main {
 
         return outcome;
     }
+
+    public static boolean Update_Reason(int Id_booking, String reason){
+            booking_update b_u = new booking_update();
+            boolean outcome = true;
+            if(b_u.Booking_Update(Id_booking, reason) == outcome){
+
+            }else {
+
+
+                boolean outcome2 = false;
+                outcome = outcome2;
+            }
+
+        return outcome;
+    }
+
+    public static boolean Update_Status(int Id_booking){
+        booking_update b_u = new booking_update();
+        boolean outcome = true;
+        if(b_u.Status_Update(Id_booking) == outcome){
+
+        }else {
+
+
+            boolean outcome2 = false;
+            outcome = outcome2;
+        }
+
+        return outcome;
+    }
 }

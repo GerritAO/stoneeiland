@@ -25,7 +25,7 @@ public class booking_view extends booking_main{
                         result.getDate("datum_uitcheck"),
                         result.getString("activiteit_naam"),
                         result.getString("reason"),
-                        result.getString("overnight_Stay"),
+                        result.getInt("overnight_Stay"),
                         result.getString("status"),
                         result.getString("gebruiker")
 

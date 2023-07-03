@@ -15,7 +15,7 @@ public class BookingObjClass {
     public Date datum_incheck;
     public Date datum_uitcheck;
     public String reason;
-    public String overnight_Stay;
+    public int overnight_Stay;
     public String status;
 
     public String gebruiker;
@@ -24,7 +24,7 @@ public class BookingObjClass {
                            String k_gender, String Huis, Date date_servering,
                            Date date_incheck, Date date_uitcheck,
                            String Activiteiten, String Reason,
-                           String overnight, String Status, String user ){
+                           int overnight, String Status, String user ){
 
         this.id = Id;
         this.klant_naam = klant;
