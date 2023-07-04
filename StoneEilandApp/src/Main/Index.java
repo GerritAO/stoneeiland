@@ -27,12 +27,6 @@ public class Index {
     protected static String role = "";
     protected static int days;
 
-
-
-
-
-
-
     public static void main(String[] args) {
 
         System.out.println("Welcome bij de Stone eiland APP\n ");

@@ -1,24 +1,37 @@
 package Main;
+
 import Users.userObjClass;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import static Main.Login.LoginForm;
 import static Users.users.*;
 
 public class Index {
 
-
+    protected static String role = "";
+    protected static String Username;
     public static void main(String[] args) {
 
         System.out.println("Welcome bij de usermanagement Portal\n ");
         System.out.println("Hier kan je gebruikers Bewerken\n");
+        String t = LoginForm();
+        String[] split = t.split(" ", 3);
+        role = split[0];
+        Username = split[1];
+        if(role.equals("Gebruiker")  | role.equals("Beheerder") ){
 
-        menuitems();
+            menuitems();
+        }
+        if(!role.equals("Gebruiker")  | !role.equals("Beheerder")){
+            System.out.println("Gebruiker heeft geen rechten of toegang tot het systeem, contact de beheerder");
+            LoginForm();
+        }
+
         System.out.println("\n");
     }
     private static void menuitems(){

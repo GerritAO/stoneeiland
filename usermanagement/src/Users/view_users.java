@@ -17,6 +17,7 @@ public class view_users extends users {
                         result.getInt("id"),
                         result.getString("user_name"),
                         result.getString("user_lastname"),
+                        result.getString("user_password"),
                         result.getString("Role"),
                         result.getDate("DOB"),
                         result.getString("Status")
