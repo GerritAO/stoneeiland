@@ -11,19 +11,22 @@ public class checkCred {
     public String UserCheck(String usernaam, String passwoord){
 
             users = View();
-            String result = "";
+            String result = null;
+             boolean found = false;
             for(userObjClass user: users){
 
                 if(user.user_name.equals(usernaam) && user.user_password.equals(passwoord)){
-                    result = user.Role +" "+ user.user_name + " " + user.DOB.toString();
+                    found = true;
+                    result = user.Role +" "+ user.user_name+ " "+ user.DOB.toString();
                     break;
                 }
-                else {
-                    result = "Gebruiker heeft geen rechten of bestaat niet";
-                    break;
+                if (found) {
+                    System.out.println("Gebruiker gevonden");
+                } else {
+                    System.out.println("");
                 }
 
-            }
+                            }
 
         return result;
     }

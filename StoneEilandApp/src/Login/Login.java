@@ -10,7 +10,7 @@ import static users.users.View;
 public class Login  {
 
             public static String LoginForm(){
-                List<userObjClass> users = View();
+
 
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Enter username: ");
